@@ -82,6 +82,14 @@ private extension Platform {
     }
     
     func fileHeader(body: String) -> String {
-        "import \(framework)\n\nextension \(variableType) {\n\n\(body)\n\n}"
+        """
+        import \(framework)
+        
+        extension \(variableType) {
+        
+        \(body)
+        
+        }
+        """
     }
 }
