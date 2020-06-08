@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		B221DAE0248D901200BE201A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221DADF248D901200BE201A /* main.swift */; };
+		B221DAE8248D905700BE201A /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = B221DAE7248D905700BE201A /* Files */; };
+		B221DAEB248D90A900BE201A /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = B221DAEA248D90A900BE201A /* ArgumentParser */; };
+		B221DAED248D90D700BE201A /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B221DAEC248D90D700BE201A /* Generator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,7 @@
 /* Begin PBXFileReference section */
 		B221DADC248D901200BE201A /* Chroma */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chroma; sourceTree = BUILT_PRODUCTS_DIR; };
 		B221DADF248D901200BE201A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B221DAEC248D90D700BE201A /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B221DAEB248D90A900BE201A /* ArgumentParser in Frameworks */,
+				B221DAE8248D905700BE201A /* Files in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				B221DADF248D901200BE201A /* main.swift */,
+				B221DAEC248D90D700BE201A /* Generator.swift */,
 			);
 			path = Chroma;
 			sourceTree = "<group>";
@@ -78,6 +85,10 @@
 			dependencies = (
 			);
 			name = Chroma;
+			packageProductDependencies = (
+				B221DAE7248D905700BE201A /* Files */,
+				B221DAEA248D90A900BE201A /* ArgumentParser */,
+			);
 			productName = Chroma;
 			productReference = B221DADC248D901200BE201A /* Chroma */;
 			productType = "com.apple.product-type.tool";
@@ -106,6 +117,10 @@
 				Base,
 			);
 			mainGroup = B221DAD3248D901200BE201A;
+			packageReferences = (
+				B221DAE6248D905700BE201A /* XCRemoteSwiftPackageReference "Files" */,
+				B221DAE9248D90A900BE201A /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = B221DADD248D901200BE201A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -121,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B221DAE0248D901200BE201A /* main.swift in Sources */,
+				B221DAED248D90D700BE201A /* Generator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +300,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B221DAE6248D905700BE201A /* XCRemoteSwiftPackageReference "Files" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Files";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 4.1.1;
+			};
+		};
+		B221DAE9248D90A900BE201A /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B221DAE7248D905700BE201A /* Files */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B221DAE6248D905700BE201A /* XCRemoteSwiftPackageReference "Files" */;
+			productName = Files;
+		};
+		B221DAEA248D90A900BE201A /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B221DAE9248D90A900BE201A /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B221DAD4248D901200BE201A /* Project object */;
 }
