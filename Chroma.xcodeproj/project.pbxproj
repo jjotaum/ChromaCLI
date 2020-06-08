@@ -47,7 +47,7 @@
 		B221DAD3248D901200BE201A = {
 			isa = PBXGroup;
 			children = (
-				B221DADE248D901200BE201A /* Chroma */,
+				B221DADE248D901200BE201A /* Application */,
 				B221DADD248D901200BE201A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,13 +60,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B221DADE248D901200BE201A /* Chroma */ = {
+		B221DADE248D901200BE201A /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				B221DADF248D901200BE201A /* main.swift */,
 				B221DAEC248D90D700BE201A /* Generator.swift */,
 			);
-			path = Chroma;
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -79,6 +79,7 @@
 				B221DAD8248D901200BE201A /* Sources */,
 				B221DAD9248D901200BE201A /* Frameworks */,
 				B221DADA248D901200BE201A /* CopyFiles */,
+				5E0FAA6B248DC10900B57DC1 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -129,6 +130,27 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5E0FAA6B248DC10900B57DC1 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B221DAD8248D901200BE201A /* Sources */ = {
