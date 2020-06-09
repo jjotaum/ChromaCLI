@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-n  Chroma -p iOS"
+            argument = "-o struct"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
