@@ -44,11 +44,11 @@ extension Platform {
         }
     }
     
-    func fileContent(body: String) -> String {
+    func fileContent(header: String, body: String) -> String {
         """
         import \(framework)
         
-        extension \(variableType) {
+        \(header) {
         
         \(body)
         
