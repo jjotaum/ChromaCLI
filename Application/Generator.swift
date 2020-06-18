@@ -31,7 +31,17 @@ extension Generator {
         let file = File(named: name, at: folder)
         let body = folder.colorDefinitions(for: platform).joined(separator: "\n\n")
         let content = platform.fileContent(body: body)
-        try? file.write(content)
+        do {
+            try file.write(content)
+            print(
+                """
+                \(file.name) was generated successfully.
+                Can be found at \(folder.path)
+                """
+            )
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
 }
