@@ -1,7 +1,7 @@
 disabled_rules: # rule identifiers to exclude from running
   - trailing_whitespace
 included: 
-  - Application
+  - Sources
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Build
   
