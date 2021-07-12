@@ -6,5 +6,7 @@
 //  Copyright © 2020 Jota Uribe. All rights reserved.
 //
 
+import ChromaLibrary
 import Foundation
-Generator.main()
+
+Chroma.main()

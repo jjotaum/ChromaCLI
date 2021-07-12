@@ -26,5 +26,4 @@ extension Folder {
             return platform.colorVariable(name: colorFolder.nameExcludingExtension)
         })
     }
-    
 }

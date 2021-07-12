@@ -17,5 +17,4 @@ extension File {
         }
         self = file
     }
-    
 }
