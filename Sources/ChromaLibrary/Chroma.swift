@@ -1,24 +1,23 @@
 //
-//  Generator.swift
+//  Chroma.swift
 //  Chroma
 //
 //  Created by Jota Uribe on 7/06/20.
 //  Copyright © 2020 Jota Uribe. All rights reserved.
 //
 
-import Foundation
 import ArgumentParser
 import Files
+import Foundation
 
-struct Generator: ParsableCommand {
-    
-    @Option(name: .shortAndLong, default: "Chroma", help: "Defines the name of the generated file.")
+public struct Chroma: ParsableCommand {
+    @Option(name: .shortAndLong, default: "Colors", help: "Defines the name of the generated file.")
     private var name: String
     
     @Option(name: .shortAndLong, default: .extension, help: OutputType.help)
     private var output: OutputType
     
-    @Option(name: .shortAndLong, default: .iOS, help: "Specifies the platform compatibility of the exported file.")
+    @Option(name: .shortAndLong, default: .iOS, help: "Specifies the platform compatibility of the exported file.\niOS, macOS, swiftUI")
     private var platform: Platform
     
     private var header: String {
@@ -30,25 +29,27 @@ struct Generator: ParsableCommand {
         }
     }
     
-    func run() throws {
+    public init() {}
+    
+    public func run() throws {
         generate()
     }
     
 }
 
-extension Generator {
+extension Chroma {
     
     private func generate() {
         let folder = Folder.root
-        let file = File(named: name, at: folder)
-        let body = folder.colorDefinitions(for: platform).joined(separator: "\n\n")
+        let file = folder.files.recursive.first(where: { $0.nameExcludingExtension == name }) ?? File(named: name, at: folder)
+        let body = folder.colorDefinitions(for: platform).sorted().joined(separator: "\n\n")
         let content = platform.fileContent(header: header, body: body)
         do {
             try file.write(content)
             print(
                 """
                 \(file.name) was generated successfully.
-                Can be found at \(folder.path)
+                Can be found at \(file.path)
                 """
             )
         } catch {

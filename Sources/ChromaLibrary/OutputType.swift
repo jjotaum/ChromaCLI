@@ -1,5 +1,5 @@
 //
-//  Output.swift
+//  OutputType.swift
 //  Chroma
 //
 //  Created by Jota Uribe on 8/06/20.
