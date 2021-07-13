@@ -20,7 +20,7 @@ OPTIONS:
                           file.
                           iOS, macOS, swiftUI (default: iOS)
   -h, --help              Show help information.
-
+```
 
 ### Installation
 

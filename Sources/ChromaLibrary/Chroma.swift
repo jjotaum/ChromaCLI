@@ -41,7 +41,7 @@ extension Chroma {
     
     private func generate() {
         let folder = Folder.root
-        let file = folder.files.recursive.first(where: { $0.nameExcludingExtension == name }) ?? File(named: name, at: folder)
+        let file = folder.files.recursive.first(where: { $0.name == "\(name).swift" }) ?? File(named: name, at: folder)
         let body = folder.colorDefinitions(for: platform).sorted().joined(separator: "\n\n")
         let content = platform.fileContent(header: header, body: body)
         do {
