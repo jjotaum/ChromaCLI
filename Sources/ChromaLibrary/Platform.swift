@@ -36,11 +36,13 @@ extension Platform {
     }
     
     func colorVariable(name: String) -> String {
+        let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols))
+        print(formattedName)
         switch self {
         case .iOS, .macOS:
-            return "    static var \(name): \(variableType) { return \(variableType)(named: \"\(name)\")! }"
+            return "    static var \(formattedName): \(variableType) { return \(variableType)(named: \"\(name)\")! }"
         case .swiftUI:
-            return "    static var \(name): \(variableType) { return \(variableType)(\"\(name)\") }"
+            return "    static var \(formattedName): \(variableType) { return \(variableType)(\"\(name)\") }"
         }
     }
     

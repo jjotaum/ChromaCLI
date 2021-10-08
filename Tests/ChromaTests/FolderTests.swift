@@ -7,24 +7,33 @@ final class FolderTests: XCTestCase {
         let path = Bundle.module.bundlePath
         let folder = try Folder(path: path)
         let definitions = folder.colorDefinitions(for: .iOS)
-        XCTAssertEqual(definitions.count, 2)
-        XCTAssertEqual(definitions.sorted().first, "    static var ExampleColor1: UIColor { return UIColor(named: \"ExampleColor1\")! }")
+        let expectedResults = ["    static var exampleColor1: UIColor { return UIColor(named: \"Example Color 1\")! }",
+                               "    static var exampleColor2: UIColor { return UIColor(named: \"exampleColor2\")! }",
+                               "    static var exampleColor3: UIColor { return UIColor(named: \"ExampleColor3\")! }",
+                               "    static var exampleColor4: UIColor { return UIColor(named: \"ExampleColor4-\")! }"]
+        XCTAssertEqual(definitions.sorted(), expectedResults)
     }
     
     func testColorDefinitionsForMacOS() throws {
         let path = Bundle.module.bundlePath
         let folder = try Folder(path: path)
         let definitions = folder.colorDefinitions(for: .macOS)
-        XCTAssertEqual(definitions.count, 2)
-        XCTAssertEqual(definitions.sorted().first, "    static var ExampleColor1: NSColor { return NSColor(named: \"ExampleColor1\")! }")
+        let expectedResults = ["    static var exampleColor1: NSColor { return NSColor(named: \"Example Color 1\")! }",
+                               "    static var exampleColor2: NSColor { return NSColor(named: \"exampleColor2\")! }",
+                               "    static var exampleColor3: NSColor { return NSColor(named: \"ExampleColor3\")! }",
+                               "    static var exampleColor4: NSColor { return NSColor(named: \"ExampleColor4-\")! }"]
+        XCTAssertEqual(definitions.sorted(), expectedResults)
     }
     
     func testColorDefinitionsForSwiftUI() throws {
         let path = Bundle.module.bundlePath
         let folder = try Folder(path: path)
         let definitions = folder.colorDefinitions(for: .swiftUI)
-        XCTAssertEqual(definitions.count, 2)
-        XCTAssertEqual(definitions.sorted().first, "    static var ExampleColor1: Color { return Color(\"ExampleColor1\") }")
+        let expectedResults = ["    static var exampleColor1: Color { return Color(\"Example Color 1\") }",
+                               "    static var exampleColor2: Color { return Color(\"exampleColor2\") }",
+                               "    static var exampleColor3: Color { return Color(\"ExampleColor3\") }",
+                               "    static var exampleColor4: Color { return Color(\"ExampleColor4-\") }"]
+        XCTAssertEqual(definitions.sorted(), expectedResults)
     }
 
     static var allTests = [
