@@ -1,6 +1,6 @@
 import XCTest
 import Files
-@testable import ChromaLibrary
+@testable import Chroma
 
 final class FolderTests: XCTestCase {
     func testColorDefinitionsForiOS() throws {

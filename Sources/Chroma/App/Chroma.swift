@@ -8,7 +8,6 @@
 
 import ArgumentParser
 import Files
-import Foundation
 
 public struct Chroma: ParsableCommand {
     @Option(name: .shortAndLong, default: "Colors", help: "Defines the name of the generated file.")

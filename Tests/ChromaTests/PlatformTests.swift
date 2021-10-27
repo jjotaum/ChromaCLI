@@ -1,6 +1,6 @@
 import XCTest
 import Files
-@testable import ChromaLibrary
+@testable import Chroma
 
 final class PlatformTests: XCTestCase {
     func testColorVariableForiOS() throws {
