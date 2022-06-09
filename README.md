@@ -7,19 +7,19 @@ A command line tool to generate swift colors definitions from .xcassets files.
 ```
 $ Chroma --help
 
-USAGE: chroma [--name <name>] [--output <output>] [--platform <platform>]
+USAGE: chroma --asset <asset> --path <path> [--type <type>] [--platform <platform>]
 
 OPTIONS:
-  -n, --name <name>       Defines the name of the generated file. (default:
-                          Colors)
-  -o, --output <output>   Specifies generated file type.
+  -a, --asset <asset>     The path of .xcasset file. 
+  -p, --path <path>       The path of the generated .swift file. 
+  -t, --type <type>       Specifies generated file type.
                           Supported values: "extension","struct". (default:
                           extension)
-  -p, --platform <platform>
-                          Specifies the platform compatibility of the exported
+  --platform <platform>   Specifies the platform compatibility of the exported
                           file.
                           iOS, macOS, swiftUI (default: iOS)
   -h, --help              Show help information.
+
 ```
 
 ### Installation

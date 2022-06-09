@@ -12,8 +12,8 @@ import Files
 extension File {
     
     init(named name: String, at folder: Folder) {
-        guard let file = try? folder.createFileIfNeeded(at: "\(name).swift") else {
-            fatalError("Error: Could not create file \(name).swift.")
+        guard let file = try? folder.createFileIfNeeded(at: name) else {
+            fatalError("Error: Could not create file \(name)")
         }
         self = file
     }
