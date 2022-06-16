@@ -1,6 +1,6 @@
 //
-//  Error.swift
-//  
+//  ChromaError.swift
+//  Chroma
 //
 //  Created by Jota Uribe on 9/06/22.
 //

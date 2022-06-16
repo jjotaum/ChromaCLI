@@ -18,4 +18,8 @@ final class FileTests: XCTestCase {
         let file = File(named: fileName, at: folder)
         XCTAssertEqual(file.path, "\(path)/\(fileName)")
     }
+    
+    static var allTests = [
+        ("testNamedAtInitWithOutExtension", testNamedAtInitWithOutExtension)
+    ]
 }
