@@ -52,7 +52,7 @@ extension Chroma {
         
         
         let folder = try Folder(path: pathURL.deletingLastPathComponent().path)
-        return File(named: pathURL.lastPathComponent, at: folder)
+        return try File(named: pathURL.lastPathComponent, at: folder)
     }
     
     private func getContentFromAssetsFile(outputFile: File) throws -> String {

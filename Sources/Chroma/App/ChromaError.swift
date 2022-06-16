@@ -9,6 +9,7 @@ import Foundation
 
 enum ChromaError: LocalizedError {
     case fileCreationFailed(path: String)
+    case fileCreationFailedAtFolder(path: String, fileName: String)
     case invalidPath(path: String)
 }
 
@@ -17,6 +18,8 @@ extension ChromaError {
         switch self {
         case .fileCreationFailed(let path):
             return "Could not create file at \(path)"
+        case .fileCreationFailedAtFolder(let path, let fileName):
+            return "Could not create file '\(fileName)' at \(path)"
         case .invalidPath(let path):
             return "Invalid path: \(path)"
         }

@@ -17,14 +17,22 @@ final class ChromaErrorTests: XCTestCase {
         XCTAssertEqual(error.localizedDescription, expectedDesc)
     }
     
+    func testFileCreationFailedAtFolder() throws {
+        let error = ChromaError.fileCreationFailedAtFolder(path: "/path", fileName: "file.ext")
+        let expectedDesc = "Could not create file 'file.ext' at /path"
+        XCTAssertEqual(error.localizedDescription, expectedDesc)
+    }
+    
     func testInvalidPathDescription() throws {
         let error = ChromaError.invalidPath(path: mockPath)
         let expectedDesc = "Invalid path: /path/file.ext"
         XCTAssertEqual(error.localizedDescription, expectedDesc)
     }
     
+    
     static var allTests = [
         ("testFileCreationFailedDescription", testFileCreationFailedDescription),
+        ("testFileCreationFailedAtFolder", testFileCreationFailedAtFolder),
         ("testInvalidPathDescription", testInvalidPathDescription)
     ]
 }

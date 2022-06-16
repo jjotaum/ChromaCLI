@@ -11,9 +11,9 @@ import Files
 
 extension File {
     
-    init(named name: String, at folder: Folder) {
+    init(named name: String, at folder: Folder) throws {
         guard let file = try? folder.createFileIfNeeded(at: name) else {
-            fatalError("Error: Could not create file \(name)")
+            throw ChromaError.fileCreationFailedAtFolder(path: folder.path, fileName: name)
         }
         self = file
     }
