@@ -10,11 +10,9 @@ import Foundation
 import ArgumentParser
 
 enum Platform: String, ExpressibleByArgument {
-    
     case iOS
     case macOS
     case swiftUI
-    
 }
 
 extension Platform {
@@ -37,7 +35,6 @@ extension Platform {
     
     func colorVariable(name: String) -> String {
         let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols))
-        print(formattedName)
         switch self {
         case .iOS, .macOS:
             return "    static var \(formattedName): \(variableType) { return \(variableType)(named: \"\(name)\")! }"
@@ -64,5 +61,4 @@ extension Platform {
         }
         """
     }
-    
 }

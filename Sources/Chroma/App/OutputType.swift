@@ -10,10 +10,8 @@ import Foundation
 import ArgumentParser
 
 enum OutputType: String, CaseIterable, ExpressibleByArgument {
-    
     case `extension`
     case `struct`
-    
 }
 
 extension OutputType {
