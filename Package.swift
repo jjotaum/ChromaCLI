@@ -12,7 +12,7 @@ let package = Package(
         .executable(name: "Chroma", targets: ["Chroma"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", .exact("0.1.0")),
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),
         .package(url: "https://github.com/JohnSundell/Files", from: "4.1.1")
     ],
     targets: [

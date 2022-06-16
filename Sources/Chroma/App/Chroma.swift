@@ -17,11 +17,11 @@ public struct Chroma: ParsableCommand {
     @Option(name: .shortAndLong, help: "The path of the generated .swift file.")
     private var path: String
     
-    @Option(name: .shortAndLong, default: .extension, help: OutputType.help)
-    private var type: OutputType
+    @Option(name: .shortAndLong, help: OutputType.help)
+    private var type: OutputType = .extension
     
-    @Option(name: .long, default: .iOS, help: "Specifies the platform compatibility of the exported file.\niOS, macOS, swiftUI")
-    private var platform: Platform
+    @Option(name: .long, help: "Specifies the platform compatibility of the exported file.\niOS, macOS, swiftUI")
+    private var platform: Platform = .iOS
     
     public init() {}
     
