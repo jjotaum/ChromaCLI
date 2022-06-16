@@ -1,6 +1,6 @@
 # Chroma
 
-A command line tool to generate swift colors definitions from .xcassets files.
+A command line tool to auto generate .swift extensions or structs files from .xcassets on your iOS, macOS & SwiftUI projects.
 
 ### Usage
 
