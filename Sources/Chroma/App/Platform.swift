@@ -37,7 +37,7 @@ extension Platform {
         let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols))
         switch self {
         case .iOS, .macOS:
-            return "    static var \(formattedName): \(variableType) { return \(variableType)(named: \"\(name)\")! }"
+            return "    static var \(formattedName): \(variableType) { return \(variableType)(named: \"\(name)\") ?? .clear }"
         case .swiftUI:
             return "    static var \(formattedName): \(variableType) { return \(variableType)(\"\(name)\") }"
         }

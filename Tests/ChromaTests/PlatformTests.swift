@@ -12,12 +12,12 @@ import Files
 final class PlatformTests: XCTestCase {
     func testColorVariableForiOS() throws {
         let variable = Platform.iOS.colorVariable(name: "ExampleColor1")
-        XCTAssertEqual(variable, "    static var exampleColor1: UIColor { return UIColor(named: \"ExampleColor1\")! }")
+        XCTAssertEqual(variable, "    static var exampleColor1: UIColor { return UIColor(named: \"ExampleColor1\") ?? .clear }")
     }
     
     func testColorVariableForMacOS() throws {
         let variable = Platform.macOS.colorVariable(name: "ExampleColor1")
-        XCTAssertEqual(variable, "    static var exampleColor1: NSColor { return NSColor(named: \"ExampleColor1\")! }")
+        XCTAssertEqual(variable, "    static var exampleColor1: NSColor { return NSColor(named: \"ExampleColor1\") ?? .clear }")
     }
     
     func testColorVariableForSwiftUI() throws {

@@ -14,10 +14,10 @@ final class FolderTests: XCTestCase {
         let path = Bundle.module.bundlePath
         let folder = try Folder(path: path)
         let definitions = folder.colorDefinitions(for: .iOS)
-        let expectedResults = ["    static var exampleColor1: UIColor { return UIColor(named: \"Example Color 1\")! }",
-                               "    static var exampleColor2: UIColor { return UIColor(named: \"exampleColor2\")! }",
-                               "    static var exampleColor3: UIColor { return UIColor(named: \"ExampleColor3\")! }",
-                               "    static var exampleColor4: UIColor { return UIColor(named: \"ExampleColor4-\")! }"]
+        let expectedResults = ["    static var exampleColor1: UIColor { return UIColor(named: \"Example Color 1\") ?? .clear }",
+                               "    static var exampleColor2: UIColor { return UIColor(named: \"exampleColor2\") ?? .clear }",
+                               "    static var exampleColor3: UIColor { return UIColor(named: \"ExampleColor3\") ?? .clear }",
+                               "    static var exampleColor4: UIColor { return UIColor(named: \"ExampleColor4-\") ?? .clear }"]
         XCTAssertEqual(definitions.sorted(), expectedResults)
     }
     
@@ -25,10 +25,10 @@ final class FolderTests: XCTestCase {
         let path = Bundle.module.bundlePath
         let folder = try Folder(path: path)
         let definitions = folder.colorDefinitions(for: .macOS)
-        let expectedResults = ["    static var exampleColor1: NSColor { return NSColor(named: \"Example Color 1\")! }",
-                               "    static var exampleColor2: NSColor { return NSColor(named: \"exampleColor2\")! }",
-                               "    static var exampleColor3: NSColor { return NSColor(named: \"ExampleColor3\")! }",
-                               "    static var exampleColor4: NSColor { return NSColor(named: \"ExampleColor4-\")! }"]
+        let expectedResults = ["    static var exampleColor1: NSColor { return NSColor(named: \"Example Color 1\") ?? .clear }",
+                               "    static var exampleColor2: NSColor { return NSColor(named: \"exampleColor2\") ?? .clear }",
+                               "    static var exampleColor3: NSColor { return NSColor(named: \"ExampleColor3\") ?? .clear }",
+                               "    static var exampleColor4: NSColor { return NSColor(named: \"ExampleColor4-\") ?? .clear }"]
         XCTAssertEqual(definitions.sorted(), expectedResults)
     }
     
