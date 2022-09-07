@@ -10,7 +10,7 @@ import Files
 @testable import Chroma
 
 final class FolderTests: XCTestCase {
-    func testColorDefinitionsForiOS() throws {
+    func test_iOS_colorDefinitions_shouldReturnUIColorList() throws {
         let path = Bundle.module.bundlePath
         let folder = try Folder(path: path)
         let definitions = folder.colorDefinitions(for: .iOS)
@@ -21,7 +21,7 @@ final class FolderTests: XCTestCase {
         XCTAssertEqual(definitions.sorted(), expectedResults)
     }
     
-    func testColorDefinitionsForMacOS() throws {
+    func test_macOS_colorDefinitions_shouldReturnNSColorList() throws {
         let path = Bundle.module.bundlePath
         let folder = try Folder(path: path)
         let definitions = folder.colorDefinitions(for: .macOS)
@@ -32,7 +32,7 @@ final class FolderTests: XCTestCase {
         XCTAssertEqual(definitions.sorted(), expectedResults)
     }
     
-    func testColorDefinitionsForSwiftUI() throws {
+    func test_swiftUI_colorDefinitions_shouldReturnColorList() throws {
         let path = Bundle.module.bundlePath
         let folder = try Folder(path: path)
         let definitions = folder.colorDefinitions(for: .swiftUI)
@@ -44,8 +44,8 @@ final class FolderTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testColorDefinitionsForiOS", testColorDefinitionsForiOS),
-        ("testColorDefinitionsForMacOS", testColorDefinitionsForMacOS),
-        ("testColorDefinitionsForSwiftUI", testColorDefinitionsForSwiftUI)
+        ("test_iOS_colorDefinitions_shouldReturnUIColorList", test_iOS_colorDefinitions_shouldReturnUIColorList),
+        ("test_macOS_colorDefinitions_shouldReturnNSColorList", test_macOS_colorDefinitions_shouldReturnNSColorList),
+        ("test_swiftUI_colorDefinitions_shouldReturnColorList", test_swiftUI_colorDefinitions_shouldReturnColorList)
     ]
 }

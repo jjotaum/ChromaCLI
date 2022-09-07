@@ -6,7 +6,8 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(ChromaErrorTests.allTests),
         testCase(FileTests.allTests),
         testCase(FolderTests.allTests),
-        testCase(PlatformTests.allTests)
+        testCase(PlatformTests.allTests),
+        testCase(StringFormatterTests.allTests)
     ]
 }
 #endif
