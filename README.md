@@ -43,3 +43,16 @@ Chroma should now be installed on /usr/local/bin and can be accessed via termina
 ```
 $ chroma
 ```
+
+### Integrate Chroma on your Xcode Project
+
+You can easily integrate Chroma on your Xcode project to maintain your generated files updated.
+
+Select your project target on Xcode > go to `Build Phases` tab > Press on `+` > Select `New Run Script Phase`.
+
+Copy & paste below command on your new script phase and update paths & platform parameters according to your needs.
+
+```
+chroma --asset MyProject/Assets.xcassets --path MyProject/Extensions/Colors.swift --platform swiftUI
+```
+Optionally you can rename your new `Run Script` to `Chroma`.

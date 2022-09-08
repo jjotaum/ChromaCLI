@@ -8,6 +8,7 @@
 
 import Foundation
 import ArgumentParser
+import Files
 
 enum Platform: String, ExpressibleByArgument {
     case iOS
@@ -16,6 +17,7 @@ enum Platform: String, ExpressibleByArgument {
 }
 
 extension Platform {
+    private static let colorAssetExtension = "colorset"
     
     var framework: String {
         switch self {
@@ -25,21 +27,29 @@ extension Platform {
         }
     }
     
+    var defaultValue: String {
+        switch self {
+        case .iOS, .macOS:
+            return "?? .clear "
+        case .swiftUI:
+            return ""
+        }
+    }
+    
+    var parameterName: String {
+        switch self {
+        case .iOS, .macOS:
+            return "named: "
+        case .swiftUI:
+            return ""
+        }
+    }
+    
     var variableType: String {
         switch self {
         case .iOS: return "UIColor"
         case .macOS: return "NSColor"
         case .swiftUI: return "Color"
-        }
-    }
-    
-    func colorVariable(name: String) -> String {
-        let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols))
-        switch self {
-        case .iOS, .macOS:
-            return "    static var \(formattedName): \(variableType) { return \(variableType)(named: \"\(name)\")! }"
-        case .swiftUI:
-            return "    static var \(formattedName): \(variableType) { return \(variableType)(\"\(name)\") }"
         }
     }
     
@@ -60,5 +70,40 @@ extension Platform {
         
         }
         """
+    }
+    
+    func fileBody(asset: Folder) -> Array<String> {
+        let assetKey = asset.nameExcludingExtension
+        // Get subfolders with valid extension
+        let colorSubfolders = asset.subfolders.recursive.filter { $0.extension == Self.colorAssetExtension }
+        // Group them by parent name to use them as MARK's
+        let parents = Dictionary(grouping: colorSubfolders, by: \.parent?.nameExcludingExtension)
+        var content: [String] = []
+        // Add main variables
+        if let root = parents[assetKey] {
+            content.append(contentsOf: colorVariableNames(folders: root))
+        }
+        // Sort keys to give output MARKS alphabetical order
+        parents.sorted(by: { $0.key ?? "" < $1.key ?? "" }).forEach { (key, value) in
+            guard key != assetKey else { return }
+            if let mark = key {
+                content.append("    // MARK: - \(mark)")
+            }
+            // Add MARK variables
+            content.append(contentsOf: colorVariableNames(folders: value))
+        }
+        return content
+    }
+    
+    private func colorVariableNames(folders: [Folder]) -> [String] {
+        // We filter out duplicated variable names
+        Set(folders.map { colorFolder in
+            return colorVariable(name: colorFolder.nameExcludingExtension)
+        }).sorted()
+    }
+    
+    func colorVariable(name: String) -> String {
+        let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols))
+        return "    static var \(formattedName): \(variableType) { return \(variableType)(\(parameterName)\"\(name)\") \(defaultValue)}"
     }
 }

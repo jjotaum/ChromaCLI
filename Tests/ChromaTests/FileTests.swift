@@ -11,7 +11,7 @@ import Files
 
 final class FileTests: XCTestCase {
     
-    func testNamedAtInitWithOutExtension() throws {
+    func test_init_withNameAndFolder() throws {
         let path = Bundle.module.bundlePath
         let folder = try Folder(path: path)
         let fileName = "File"
@@ -20,6 +20,6 @@ final class FileTests: XCTestCase {
     }
     
     static var allTests = [
-        ("testNamedAtInitWithOutExtension", testNamedAtInitWithOutExtension)
+        ("test_init_withNameAndFolder", test_init_withNameAndFolder)
     ]
 }
