@@ -57,7 +57,7 @@ extension Chroma {
     
     private func getContentFromAssetsFile(outputFile: File) throws -> String {
         let folder = try Folder(path: asset)
-        let body = folder.colorDefinitions(for: platform).sorted().joined(separator: "\n")
+        let body = folder.fileBody(for: platform).joined(separator: "\n")
         return platform.fileContent(header: header(file: outputFile), body: body)
     }
     

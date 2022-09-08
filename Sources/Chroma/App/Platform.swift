@@ -25,6 +25,24 @@ extension Platform {
         }
     }
     
+    var defaultValue: String {
+        switch self {
+        case .iOS, .macOS:
+            return "?? .clear "
+        case .swiftUI:
+            return ""
+        }
+    }
+    
+    var parameterName: String {
+        switch self {
+        case .iOS, .macOS:
+            return "named: "
+        case .swiftUI:
+            return ""
+        }
+    }
+    
     var variableType: String {
         switch self {
         case .iOS: return "UIColor"
@@ -35,12 +53,7 @@ extension Platform {
     
     func colorVariable(name: String) -> String {
         let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols))
-        switch self {
-        case .iOS, .macOS:
-            return "    static var \(formattedName): \(variableType) { return \(variableType)(named: \"\(name)\") ?? .clear }"
-        case .swiftUI:
-            return "    static var \(formattedName): \(variableType) { return \(variableType)(\"\(name)\") }"
-        }
+        return "    static var \(formattedName): \(variableType) { return \(variableType)(\(parameterName)\"\(name)\") \(defaultValue)}"
     }
     
     func fileContent(header: String, body: String) -> String {
