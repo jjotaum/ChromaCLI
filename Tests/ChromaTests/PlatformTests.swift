@@ -15,9 +15,6 @@ private enum AssetType {
 }
 
 final class PlatformTests: XCTestCase {
-    private let assetPath = "/Resources/Assets.xcassets"
-    private let folderAssetPath = "/Resources/FolderAssets.xcassets"
-    
     func test_framework_outputValues() {
         XCTAssertEqual(Platform.iOS.framework, "UIKit")
         XCTAssertEqual(Platform.macOS.framework, "AppKit")
@@ -41,7 +38,7 @@ final class PlatformTests: XCTestCase {
     }
     
     func test_fileBodyFormat_withRegularAsset() throws {
-        let path = try XCTUnwrap(Bundle.module.resourcePath?.appending(assetPath))
+        let path = try XCTUnwrap(resourceFilePath(fileName: "Assets.xcassets"))
         let assetPath = try Folder(path: path)
         var fileBody = Platform.iOS.fileBody(asset: assetPath)
         XCTAssertEqual(fileBody, expectedResult(.iOS))
@@ -54,7 +51,7 @@ final class PlatformTests: XCTestCase {
     }
     
     func test_fileBodyFormat_withAssetWithFolders() throws {
-        let path = try XCTUnwrap(Bundle.module.resourcePath?.appending(folderAssetPath))
+        let path = try XCTUnwrap(resourceFilePath(fileName: "FolderAssets.xcassets"))
         let assetPath = try Folder(path: path)
         var fileBody = Platform.iOS.fileBody(asset: assetPath)
         XCTAssertEqual(fileBody, expectedResult(.iOS, assetType: .withFolders))
@@ -78,6 +75,16 @@ final class PlatformTests: XCTestCase {
 // MARK: - Helper Methods
 
 extension PlatformTests {
+    private func resourceFilePath(fileName: String) throws -> String {
+        let resourcePath = try XCTUnwrap(Bundle.module.resourcePath)
+        do {
+            _ = try Folder(path: resourcePath.appending("/Resources"))
+            return resourcePath.appending("/Resources/\(fileName)")
+        } catch {
+            return resourcePath.appending("/\(fileName)")
+        }
+    }
+    
     private func expectedResult(_ platform: Platform, assetType: AssetType = .regular) -> [String] {
         let variableType = platform.variableType
         let defaultValue = platform.defaultValue
