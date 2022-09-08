@@ -26,15 +26,7 @@ public struct Chroma: ParsableCommand {
     public init() {}
     
     public func run() throws {
-        try generate()
-    }
-    
-}
-
-extension Chroma {
-    
-    private func generate() throws {
-        let outputFile = try outputFile()
+        let outputFile = try createOutputFile()
         let content = try getContentFromAssetsFile(outputFile: outputFile)
         try outputFile.write(content)
         print(
@@ -45,19 +37,22 @@ extension Chroma {
         )
     }
     
-    private func outputFile() throws -> File {
+}
+
+extension Chroma {
+    private func createOutputFile() throws -> File {
+        // Check if path param is a valid swift file path
         guard let pathURL = URL(string: path), !pathURL.hasDirectoryPath, pathURL.pathExtension == "swift"  else {
             throw ChromaError.invalidPath(path: path)
         }
-        
         
         let folder = try Folder(path: pathURL.deletingLastPathComponent().path)
         return try File(named: pathURL.lastPathComponent, at: folder)
     }
     
     private func getContentFromAssetsFile(outputFile: File) throws -> String {
-        let folder = try Folder(path: asset)
-        let body = folder.fileBody(for: platform).joined(separator: "\n")
+        let assetFolder = try Folder(path: asset)
+        let body = platform.fileBody(asset: assetFolder).joined(separator: "\n")
         return platform.fileContent(header: header(file: outputFile), body: body)
     }
     
