@@ -48,7 +48,7 @@ $ chroma
 
 You can easily integrate Chroma on your Xcode project to maintain your generated files updated.
 
-Select your project target on Xcode > go to `Build Phases` tab > Press on `+` > Select `New Run Script Phase`.
+Select your project target on Xcode > go to `Build Phases` tab > Press on `+` > Select `New Run Script Phase` > Uncheck `Based on dependency analysis` option.
 
 Copy & paste below command on your new script phase and update paths & platform parameters according to your needs.
 
