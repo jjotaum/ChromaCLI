@@ -53,6 +53,15 @@ extension Platform {
         }
     }
     
+    var systemReservedVariableNames: [String] {
+        switch self {
+        case .iOS, .macOS:
+            return []
+        case .swiftUI:
+            return ["accentColor"]
+        }
+    }
+    
     func fileContent(header: String, body: String) -> String {
         """
         //
@@ -97,13 +106,14 @@ extension Platform {
     
     private func colorVariableNames(folders: [Folder]) -> [String] {
         // We filter out duplicated variable names
-        Set(folders.map { colorFolder in
+        Set(folders.compactMap { colorFolder in
             return colorVariable(name: colorFolder.nameExcludingExtension)
         }).sorted()
     }
     
-    func colorVariable(name: String) -> String {
+    func colorVariable(name: String) -> String? {
         let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols))
+        guard !systemReservedVariableNames.contains(formattedName) else { return nil }
         return "    static var \(formattedName): \(variableType) { return \(variableType)(\(parameterName)\"\(name)\") \(defaultValue)}"
     }
 }
