@@ -20,8 +20,8 @@ public struct Chroma: ParsableCommand {
     @Option(name: .shortAndLong, help: OutputType.help)
     private var type: OutputType = .extension
     
-    @Option(name: .long, help: "Specifies the platform compatibility of the exported file.\niOS, macOS, swiftUI")
-    private var platform: Platform = .iOS
+    @Option(name: .long, help: "Specifies the framework compatibility of the exported file.\nAppKit, UIKit, SwiftUI")
+    private var framework: Framework = .SwiftUI
     
     public init() {}
     
@@ -52,14 +52,14 @@ extension Chroma {
     
     private func getContentFromAssetsFile(outputFile: File) throws -> String {
         let assetFolder = try Folder(path: asset)
-        let body = platform.fileBody(asset: assetFolder).joined(separator: "\n")
-        return platform.fileContent(header: header(file: outputFile), body: body)
+        let body = framework.fileBody(asset: assetFolder).joined(separator: "\n")
+        return framework.fileContent(header: header(file: outputFile), body: body)
     }
     
     private func header(file: File) -> String {
         switch type {
         case .extension:
-            return "\(type.rawValue) \(platform.variableType)"
+            return "\(type.rawValue) \(framework.variableType)"
         case .struct:
             return "\(type.rawValue) \(file.nameExcludingExtension)"
         }

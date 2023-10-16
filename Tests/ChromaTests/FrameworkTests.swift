@@ -1,5 +1,5 @@
 //
-//  FileTests.swift
+//  FrameworkTests.swift
 //  Chroma
 //
 //  Created by Jota Uribe on 9/06/22.
@@ -14,53 +14,53 @@ private enum AssetType {
     case withFolders
 }
 
-final class PlatformTests: XCTestCase {
+final class FrameworkTests: XCTestCase {
     func test_framework_outputValues() {
-        XCTAssertEqual(Platform.iOS.framework, "UIKit")
-        XCTAssertEqual(Platform.macOS.framework, "AppKit")
-        XCTAssertEqual(Platform.swiftUI.framework, "SwiftUI")
+        XCTAssertEqual(Framework.AppKit.rawValue, "AppKit")
+        XCTAssertEqual(Framework.UIKit.rawValue, "UIKit")
+        XCTAssertEqual(Framework.SwiftUI.rawValue, "SwiftUI")
     }
     
     func test_variableType_outputValues() {
-        XCTAssertEqual(Platform.iOS.variableType, "UIColor")
-        XCTAssertEqual(Platform.macOS.variableType, "NSColor")
-        XCTAssertEqual(Platform.swiftUI.variableType, "Color")
+        XCTAssertEqual(Framework.AppKit.variableType, "NSColor")
+        XCTAssertEqual(Framework.SwiftUI.variableType, "Color")
+        XCTAssertEqual(Framework.UIKit.variableType, "UIColor")
     }
     
     func test_colorVariable_outputValues() throws {
         let variableName = "ExampleColor1"
-        var platform: Platform = .iOS
-        XCTAssertEqual(platform.colorVariable(name: variableName), "    static var exampleColor1: UIColor { return UIColor(named: \"ExampleColor1\") ?? .clear }")
-        platform = .macOS
+        var platform: Framework = .AppKit
         XCTAssertEqual(platform.colorVariable(name: variableName), "    static var exampleColor1: NSColor { return NSColor(named: \"ExampleColor1\") ?? .clear }")
-        platform = .swiftUI
+        platform = .SwiftUI
         XCTAssertEqual(platform.colorVariable(name: variableName), "    static var exampleColor1: Color { return Color(\"ExampleColor1\") }")
+        platform = .UIKit
+        XCTAssertEqual(platform.colorVariable(name: variableName), "    static var exampleColor1: UIColor { return UIColor(named: \"ExampleColor1\") ?? .clear }")
     }
     
     func test_fileBodyFormat_withRegularAsset() throws {
         let path = try XCTUnwrap(resourceFilePath(fileName: "Assets.xcassets"))
         let assetPath = try Folder(path: path)
-        var fileBody = Platform.iOS.fileBody(asset: assetPath)
-        XCTAssertEqual(fileBody, expectedResult(.iOS))
+        var fileBody = Framework.AppKit.fileBody(asset: assetPath)
+        XCTAssertEqual(fileBody, expectedResult(.AppKit))
         
-        fileBody = Platform.macOS.fileBody(asset: assetPath)
-        XCTAssertEqual(fileBody, expectedResult(.macOS))
+        fileBody = Framework.AppKit.fileBody(asset: assetPath)
+        XCTAssertEqual(fileBody, expectedResult(.AppKit))
         
-        fileBody = Platform.swiftUI.fileBody(asset: assetPath)
-        XCTAssertEqual(fileBody, expectedResult(.swiftUI))
+        fileBody = Framework.SwiftUI.fileBody(asset: assetPath)
+        XCTAssertEqual(fileBody, expectedResult(.SwiftUI))
     }
     
     func test_fileBodyFormat_withAssetWithFolders() throws {
         let path = try XCTUnwrap(resourceFilePath(fileName: "FolderAssets.xcassets"))
         let assetPath = try Folder(path: path)
-        var fileBody = Platform.iOS.fileBody(asset: assetPath)
-        XCTAssertEqual(fileBody, expectedResult(.iOS, assetType: .withFolders))
+        var fileBody = Framework.AppKit.fileBody(asset: assetPath)
+        XCTAssertEqual(fileBody, expectedResult(.AppKit, assetType: .withFolders))
         
-        fileBody = Platform.macOS.fileBody(asset: assetPath)
-        XCTAssertEqual(fileBody, expectedResult(.macOS, assetType: .withFolders))
+        fileBody = Framework.AppKit.fileBody(asset: assetPath)
+        XCTAssertEqual(fileBody, expectedResult(.AppKit, assetType: .withFolders))
         
-        fileBody = Platform.swiftUI.fileBody(asset: assetPath)
-        XCTAssertEqual(fileBody, expectedResult(.swiftUI, assetType: .withFolders))
+        fileBody = Framework.SwiftUI.fileBody(asset: assetPath)
+        XCTAssertEqual(fileBody, expectedResult(.SwiftUI, assetType: .withFolders))
     }
 
     static var allTests = [
@@ -74,7 +74,7 @@ final class PlatformTests: XCTestCase {
 
 // MARK: - Helper Methods
 
-extension PlatformTests {
+extension FrameworkTests {
     private func resourceFilePath(fileName: String) throws -> String {
         let resourcePath = try XCTUnwrap(Bundle.module.resourcePath)
         do {
@@ -85,7 +85,7 @@ extension PlatformTests {
         }
     }
     
-    private func expectedResult(_ platform: Platform, assetType: AssetType = .regular) -> [String] {
+    private func expectedResult(_ platform: Framework, assetType: AssetType = .regular) -> [String] {
         let variableType = platform.variableType
         let defaultValue = platform.defaultValue
         switch assetType {

@@ -1,63 +1,54 @@
 //
-//  Platform.swift
+//  Framework.swift
 //  Chroma
 //
-//  Created by Oscar De Moya on 7/06/20.
-//  Copyright © 2020 Jota Uribe. All rights reserved.
+//  Created by Jota Uribe on 16/10/23.
 //
 
 import Foundation
 import ArgumentParser
 import Files
 
-enum Platform: String, ExpressibleByArgument {
-    case iOS
-    case macOS
-    case swiftUI
+enum Framework: String, ExpressibleByArgument {
+    case AppKit
+    case SwiftUI
+    case UIKit
 }
 
-extension Platform {
+extension Framework {
     private static let colorAssetExtension = "colorset"
-    
-    var framework: String {
-        switch self {
-        case .iOS: return "UIKit"
-        case .macOS: return "AppKit"
-        case .swiftUI: return "SwiftUI"
-        }
-    }
     
     var defaultValue: String {
         switch self {
-        case .iOS, .macOS:
+        case .UIKit, .AppKit:
             return "?? .clear "
-        case .swiftUI:
+        case .SwiftUI:
             return ""
         }
     }
     
     var parameterName: String {
         switch self {
-        case .iOS, .macOS:
+        case .UIKit, .AppKit:
             return "named: "
-        case .swiftUI:
+        case .SwiftUI:
             return ""
         }
     }
     
     var variableType: String {
         switch self {
-        case .iOS: return "UIColor"
-        case .macOS: return "NSColor"
-        case .swiftUI: return "Color"
+        case .UIKit: return "UIColor"
+        case .AppKit: return "NSColor"
+        case .SwiftUI: return "Color"
         }
     }
     
     var systemReservedVariableNames: [String] {
         switch self {
-        case .iOS, .macOS:
+        case .UIKit, .AppKit:
             return []
-        case .swiftUI:
+        case .SwiftUI:
             return ["accentColor"]
         }
     }
@@ -70,8 +61,8 @@ extension Platform {
         //
         //  This file was auto generated please do not modify it directly.
         //
-
-        import \(framework)
+        
+        import \(rawValue)
         
         \(header) {
         
