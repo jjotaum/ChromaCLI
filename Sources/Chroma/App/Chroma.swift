@@ -19,7 +19,7 @@ public struct Chroma: ParsableCommand {
     @Option(name: .shortAndLong, help: OutputType.help)
     private var type: OutputType = .extension
     
-    @Option(name: .long, help: "Specifies the framework compatibility of the exported file.\nAppKit, UIKit, SwiftUI")
+    @Option(name: .long, help: Framework.help)
     private var framework: Framework = .SwiftUI
     
     public init() {}

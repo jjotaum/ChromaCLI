@@ -8,10 +8,19 @@
 import Foundation
 import ArgumentParser
 
-enum Framework: String, ExpressibleByArgument {
+enum Framework: String, CaseIterable, ExpressibleByArgument {
     case AppKit
     case SwiftUI
     case UIKit
+}
+
+extension Framework {
+    static var help: ArgumentHelp {
+        """
+        The framework compatibility of generated .swift file.
+        Supported values: \(formattedValues).
+        """
+    }
 }
 
 extension Framework {

@@ -12,12 +12,12 @@ USAGE: chroma --asset <asset> --path <path> [--type <type>] [--framework <framew
 OPTIONS:
   -a, --asset <asset>     The path of .xcasset file.
   -p, --path <path>       The path of the generated .swift file.
-  -t, --type <type>       Specifies generated file type.
-                          Supported values: "extension","struct". (default:
+  -t, --type <type>       The output type of generated .swift file.
+                          Supported values: extension, struct. (default:
                           extension)
-  --framework <framework> Specifies the framework compatibility of the exported
-                          file.
-                          AppKit, UIKit, SwiftUI (default: SwiftUI)
+  --framework <framework> The framework compatibility of generated .swift file.
+                          Supported values: AppKit, SwiftUI, UIKit. (default:
+                          SwiftUI)
   -h, --help              Show help information.
 
 ```
