@@ -15,14 +15,9 @@ enum OutputType: String, CaseIterable, ExpressibleByArgument {
 }
 
 extension OutputType {
-    
-    private static var formattedValues: String {
-        return OutputType.allCases.map { "\"\($0.rawValue)\"" }.joined(separator: ",")
-    }
-    
     static var help: ArgumentHelp {
         """
-        Specifies generated file type.
+        The output type of generated .swift file.
         Supported values: \(formattedValues).
         """
     }

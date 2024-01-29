@@ -1,65 +1,44 @@
 //
-//  Platform.swift
+//  FileGenerator.swift
 //  Chroma
 //
-//  Created by Oscar De Moya on 7/06/20.
-//  Copyright © 2020 Jota Uribe. All rights reserved.
+//  Created by Jota Uribe on 16/10/23.
 //
 
-import Foundation
-import ArgumentParser
 import Files
+import Foundation
 
-enum Platform: String, ExpressibleByArgument {
-    case iOS
-    case macOS
-    case swiftUI
-}
-
-extension Platform {
+struct FileGenerator {
     private static let colorAssetExtension = "colorset"
     
-    var framework: String {
-        switch self {
-        case .iOS: return "UIKit"
-        case .macOS: return "AppKit"
-        case .swiftUI: return "SwiftUI"
-        }
+    let asset: String
+    let path: String
+    let type: OutputType
+    let framework: Framework
+    
+    func generate() throws -> File {
+        let outputFile = try createOutputFile()
+        let content = try getContentFromAssetsFile(outputFile: outputFile)
+        try outputFile.write(content)
+        return outputFile
     }
     
-    var defaultValue: String {
-        switch self {
-        case .iOS, .macOS:
-            return "?? .clear "
-        case .swiftUI:
-            return ""
+    // MARK: Helper Methods
+    
+    private func createOutputFile() throws -> File {
+        // Check if path param is a valid swift file path
+        guard let pathURL = URL(string: path), !pathURL.hasDirectoryPath, pathURL.pathExtension == "swift"  else {
+            throw ChromaError.invalidPath(path: path)
         }
+        
+        let folder = try Folder(path: pathURL.deletingLastPathComponent().path)
+        return try File(named: pathURL.lastPathComponent, at: folder)
     }
     
-    var parameterName: String {
-        switch self {
-        case .iOS, .macOS:
-            return "named: "
-        case .swiftUI:
-            return ""
-        }
-    }
-    
-    var variableType: String {
-        switch self {
-        case .iOS: return "UIColor"
-        case .macOS: return "NSColor"
-        case .swiftUI: return "Color"
-        }
-    }
-    
-    var systemReservedVariableNames: [String] {
-        switch self {
-        case .iOS, .macOS:
-            return []
-        case .swiftUI:
-            return ["accentColor"]
-        }
+    private func getContentFromAssetsFile(outputFile: File) throws -> String {
+        let assetFolder = try Folder(path: asset)
+        let body = fileBody(asset: assetFolder).joined(separator: "\n")
+        return fileContent(header: header(fileName: outputFile.nameExcludingExtension), body: body)
     }
     
     func fileContent(header: String, body: String) -> String {
@@ -70,8 +49,8 @@ extension Platform {
         //
         //  This file was auto generated please do not modify it directly.
         //
-
-        import \(framework)
+        
+        import \(framework.rawValue)
         
         \(header) {
         
@@ -79,6 +58,15 @@ extension Platform {
         
         }
         """
+    }
+    
+    func header(fileName: String) -> String {
+        switch type {
+        case .extension:
+            return "\(type.rawValue) \(framework.variableType)"
+        case .struct:
+            return "\(type.rawValue) \(fileName.capitalized)"
+        }
     }
     
     func fileBody(asset: Folder) -> Array<String> {
@@ -107,13 +95,7 @@ extension Platform {
     private func colorVariableNames(folders: [Folder]) -> [String] {
         // We filter out duplicated variable names
         Set(folders.compactMap { colorFolder in
-            return colorVariable(name: colorFolder.nameExcludingExtension)
+            return framework.colorVariable(name: colorFolder.nameExcludingExtension)
         }).sorted()
-    }
-    
-    func colorVariable(name: String) -> String? {
-        let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols))
-        guard !systemReservedVariableNames.contains(formattedName) else { return nil }
-        return "    static var \(formattedName): \(variableType) { return \(variableType)(\(parameterName)\"\(name)\") \(defaultValue)}"
     }
 }

@@ -1,23 +1,23 @@
 # Chroma
 
-A command line tool to auto generate .swift extensions or structs files from .xcassets on your iOS, macOS & SwiftUI projects.
+A command line tool to generate .swift extensions or structs files from .xcassets on your UIKit, AppKIt or SwiftUI projects.
 
 ### Usage
 
 ```
 $ Chroma --help
 
-USAGE: chroma --asset <asset> --path <path> [--type <type>] [--platform <platform>]
+USAGE: chroma --asset <asset> --path <path> [--type <type>] [--framework <framework>]
 
 OPTIONS:
-  -a, --asset <asset>     The path of .xcasset file. 
-  -p, --path <path>       The path of the generated .swift file. 
-  -t, --type <type>       Specifies generated file type.
-                          Supported values: "extension","struct". (default:
+  -a, --asset <asset>     The path of .xcasset file.
+  -p, --path <path>       The path of the generated .swift file.
+  -t, --type <type>       The output type of generated .swift file.
+                          Supported values: extension, struct. (default:
                           extension)
-  --platform <platform>   Specifies the platform compatibility of the exported
-                          file.
-                          iOS, macOS, swiftUI (default: iOS)
+  --framework <framework> The framework compatibility of generated .swift file.
+                          Supported values: AppKit, SwiftUI, UIKit. (default:
+                          SwiftUI)
   -h, --help              Show help information.
 
 ```
@@ -53,6 +53,6 @@ Select your project target on Xcode > go to `Build Phases` tab > Press on `+` > 
 Copy & paste below command on your new script phase and update paths & platform parameters according to your needs.
 
 ```
-chroma --asset MyProject/Assets.xcassets --path MyProject/Extensions/Colors.swift --platform swiftUI
+chroma --asset MyProject/Assets.xcassets --path MyProject/Extensions/Colors.swift --framework SwiftUI
 ```
 Optionally you can rename your new `Run Script` to `Chroma`.
