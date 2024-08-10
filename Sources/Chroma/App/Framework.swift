@@ -60,7 +60,7 @@ extension Framework {
     }
     
     func colorVariable(name: String) -> String? {
-        let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols))
+        let formattedName = name.camelCased().removing(.punctuationCharacters.union(.symbols)).replacingOccurrences(of: "Color", with: "")
         guard !systemReservedVariableNames.contains(formattedName) else { return nil }
         return "    static var \(formattedName): \(variableType) { return \(variableType)(\(parameterName)\"\(name)\") \(defaultValue)}"
     }

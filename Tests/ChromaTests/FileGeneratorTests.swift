@@ -160,21 +160,21 @@ extension FileGeneratorTests {
         switch assetType {
         case .regular:
             return [
-                "    static var exampleColor1: \(variableType) { return \(variableType)(\(framework.parameterName)\"Example Color 1\") \(defaultValue)}",
-                "    static var exampleColor2: \(variableType) { return \(variableType)(\(framework.parameterName)\"exampleColor2\") \(defaultValue)}",
-                "    static var exampleColor3: \(variableType) { return \(variableType)(\(framework.parameterName)\"ExampleColor3\") \(defaultValue)}",
-                "    static var exampleColor4: \(variableType) { return \(variableType)(\(framework.parameterName)\"ExampleColor4-\") \(defaultValue)}"
+                "    static var example1: \(variableType) { return \(variableType)(\(framework.parameterName)\"Example Color 1\") \(defaultValue)}",
+                "    static var example2: \(variableType) { return \(variableType)(\(framework.parameterName)\"exampleColor2\") \(defaultValue)}",
+                "    static var example3: \(variableType) { return \(variableType)(\(framework.parameterName)\"ExampleColor3\") \(defaultValue)}",
+                "    static var example4: \(variableType) { return \(variableType)(\(framework.parameterName)\"ExampleColor4-\") \(defaultValue)}"
             ]
         case .withFolders:
             return [
-                "    static var rootExampleColor: \(variableType) { return \(variableType)(\(framework.parameterName)\"Root Example Color\") \(defaultValue)}",
+                "    static var rootExample: \(variableType) { return \(variableType)(\(framework.parameterName)\"Root Example Color\") \(defaultValue)}",
                 "    // MARK: - Example 1",
-                "    static var exampleColor1: \(variableType) { return \(variableType)(\(framework.parameterName)\"Example Color 1\") \(defaultValue)}",
-                "    static var exampleColor2: \(variableType) { return \(variableType)(\(framework.parameterName)\"exampleColor2\") \(defaultValue)}",
-                "    static var exampleColor3: \(variableType) { return \(variableType)(\(framework.parameterName)\"ExampleColor3\") \(defaultValue)}",
-                "    static var exampleColor4: \(variableType) { return \(variableType)(\(framework.parameterName)\"ExampleColor4-\") \(defaultValue)}",
+                "    static var example1: \(variableType) { return \(variableType)(\(framework.parameterName)\"Example Color 1\") \(defaultValue)}",
+                "    static var example2: \(variableType) { return \(variableType)(\(framework.parameterName)\"exampleColor2\") \(defaultValue)}",
+                "    static var example3: \(variableType) { return \(variableType)(\(framework.parameterName)\"ExampleColor3\") \(defaultValue)}",
+                "    static var example4: \(variableType) { return \(variableType)(\(framework.parameterName)\"ExampleColor4-\") \(defaultValue)}",
                 "    // MARK: - SubFolder",
-                "    static var subFolderExampleColor: \(variableType) { return \(variableType)(\(framework.parameterName)\"SubFolder Example Color\") \(defaultValue)}"
+                "    static var subFolderExample: \(variableType) { return \(variableType)(\(framework.parameterName)\"SubFolder Example Color\") \(defaultValue)}"
             ]
         }
     }

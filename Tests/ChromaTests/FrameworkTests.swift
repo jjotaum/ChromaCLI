@@ -25,11 +25,11 @@ final class FrameworkTests: XCTestCase {
     func test_colorVariable_outputValues() throws {
         let variableName = "ExampleColor1"
         var platform: Framework = .AppKit
-        XCTAssertEqual(platform.colorVariable(name: variableName), "    static var exampleColor1: NSColor { return NSColor(named: \"ExampleColor1\") ?? .clear }")
+        XCTAssertEqual(platform.colorVariable(name: variableName), "    static var example1: NSColor { return NSColor(named: \"ExampleColor1\") ?? .clear }")
         platform = .SwiftUI
-        XCTAssertEqual(platform.colorVariable(name: variableName), "    static var exampleColor1: Color { return Color(\"ExampleColor1\") }")
+        XCTAssertEqual(platform.colorVariable(name: variableName), "    static var example1: Color { return Color(\"ExampleColor1\") }")
         platform = .UIKit
-        XCTAssertEqual(platform.colorVariable(name: variableName), "    static var exampleColor1: UIColor { return UIColor(named: \"ExampleColor1\") ?? .clear }")
+        XCTAssertEqual(platform.colorVariable(name: variableName), "    static var example1: UIColor { return UIColor(named: \"ExampleColor1\") ?? .clear }")
     }
 
     static var allTests = [
