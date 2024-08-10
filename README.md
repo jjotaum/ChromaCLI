@@ -1,6 +1,6 @@
 # Chroma
+Xcode Assets Macros alternative CLI to automatically generate static properties corresponding to color assets on SwiftUI, UIKit or AppKIt projects.
 
-A command line tool to generate .swift extensions or structs files from .xcassets on your UIKit, AppKIt or SwiftUI projects.
 
 ### Usage
 
